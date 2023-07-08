@@ -1,0 +1,30 @@
+{% load static %}
+{% load humanize %}
+<div class="popular">
+    <h4 class="txt33 p-b-35 p-t-58">
+        Most popular
+    </h4>
+
+    <ul>
+        {% for post in posts %}
+            <li class="flex-w m-b-25">
+                <div class="size16 bo-rad-10 wrap-pic-w of-hidden m-r-18">
+                    <a href="{% url 'blog:single' post.id %}">
+                        <img src="{{ post.image_thumbnail.url }}" alt="IMG-BLOG">
+                    </a>
+                </div>
+
+                <div class="size28">
+                    <a href="{% url 'blog:single' post.id %}" class="dis-block txt28 m-b-8">
+                        {{ post.title }}
+                    </a>
+
+                    <span class="txt14">
+                        {{ post.published_date|naturaltime }}
+                    </span>
+                </div>
+            </li>
+        {% endfor %}
+
+    </ul>
+</div>

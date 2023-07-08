@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+{% load humanize %}
+{% block content %}
+
+    <!-- Title Page -->
+    <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
+             style="background-image: url({{ background|image_url:'blog_single' }});">
+        <h2 class="tit6 t-center">
+            Blog
+        </h2>
+    </section>
+
+
+    <!-- Content page -->
+    <section>
+        <div class="bread-crumb bo5-b p-t-17 p-b-17">
+            <div class="container">
+                <a href="{% url 'website:index' %}" class="txt27">
+                    Home
+                </a>
+
+                <span class="txt29 m-l-10 m-r-10">/</span>
+
+                <a href="{% url 'blog:index' %}" class="txt27">
+                    Blog
+                </a>
+
+                <span class="txt29 m-l-10 m-r-10">/</span>
+
+                <span class="txt29">
+					{{ post.title }}
+				</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-8 col-lg-9">
+                    <div class="p-t-80 p-b-124 bo5-r p-r-50 h-full p-r-0-md bo-none-md">
+                        <!-- Block4 -->
+                        <div class="blo4 p-b-63">
+                            <!-- - -->
+                            <div class="pic-blo4 hov-img-zoom bo-rad-10 pos-relative">
+                                <a href="{{ post.image.url }}">
+                                    <img src="{{ post.image.url }}" alt="IMG-BLOG">
+                                </a>
+
+                                <div class="date-blo4 flex-col-c-m">
+									<span class="txt30 m-b-4">
+										{{ post.published_date|date:"d" }}
+									</span>
+
+                                    <span class="txt31">
+										{{ post.published_date|date:"M, Y" }}
+									</span>
+                                </div>
+                            </div>
+
+                            <!-- - -->
+                            <div class="text-blo4 p-t-33">
+                                <h4 class="p-b-16 tit9">{{ post.title }}></h4>
+                                <div class="txt32 flex-w p-b-10">
+                                    <ul class="lnr lnr-user">
+                                        <a style="font-size:10px"
+                                           href="{% url 'blog:author' author_username=post.author.username %}">{{ post.author.get_full_name }}</a>
+                                        <span class="m-r-6 m-l-4"> | </span>
+                                    </ul>
+                                    <ul class="lnr lnr-calendar-full">
+                                        {{ post.published_date|date:"d M, Y" }}
+                                        <span class="m-r-6 m-l-4"> | </span>
+                                    </ul>
+                                    <ul class="lnr lnr-eye">
+                                        {{ post.counted_views }} Views
+                                        <span class="m-r-6 m-l-4"> | </span>
+                                    </ul>
+                                    <ul class="lnr lnr-pencil">
+                                        {% comments_count post %} Comment(s)
+                                    </ul>
+                                </div>
+                                <div class="txt32 flex-w p-b-24">
+                                        <span class="lnr lnr-tag">
+										{% for cat in post.category.all %}
+                                            <a style="font-size:12px"
+                                               href="{% url 'blog:category' cat_name=cat.name %}">{{ cat.name }}</a>
+                                            {% if not forloop.last %}
+                                                <span class="m-r-6 m-l-4">|</span>
+                                            {% endif %}
+                                        {% endfor %}
+									    </span>
+                                </div>
+                                <p>
+                                    {{ post.content|safe }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="comments-area">
+                            <h4>{{ comments|length }} Comment(s)</h4>
+                            {% for comment in comments %}
+                                <div class="comment-list">
+                                    <div class="single-comment justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <img src="{% static 'default/no-avatar.png' %}" alt="">
+                                            </div>
+                                            <div class="desc">
+                                                <h5><a href="#">{{ comment.name }}</a></h5>
+                                                <p class="date">{{ comment.created_date|naturaltime }}</p>
+                                                <p class="comment">
+                                                    {{ comment.comment }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                There are no comments yet
+                            {% endfor %}
+                        </div>
+
+                        <!-- Leave a comment -->
+                        <form class="comment-form p-t-10" method="POST" action="{% url 'blog:single' pid=post.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="post" value="{{ post.id }}">
+                            <h4 class="txt33 p-b-14">
+                                Leave a Comment
+                            </h4>
+                            {% if request.user.is_authenticated %}
+                                <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                                    <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name"
+                                           value="{{ request.user.get_full_name }}" readonly>
+                                </div>
+
+                                <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                                    <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email"
+                                           value="{{ request.user.email }}" readonly>
+                                </div>
+                            {% else %}
+                                <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                                    <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name"
+                                           placeholder="Name *">
+                                </div>
+
+                                <div class="size30 bo2 bo-rad-10 m-t-3 m-b-20">
+                                    <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email"
+                                           placeholder="Email *">
+                                </div>
+                            {% endif %}
+                            <textarea class="bo-rad-10 size29 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-40" name="comment"
+                                      placeholder="Comment..."></textarea>
+
+
+                            <div class="m-t-3 m-b-20">{{ form.captcha }}</div>
+                            <!-- Button3 -->
+                            <button type="submit" class="btn3 flex-c-m size31 txt11 trans-0-4">
+                                Post Comment
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-lg-3">
+                    <div class="sidebar2 p-t-80 p-b-80 p-l-20 p-l-0-md p-t-0-md">
+                        <!-- Search -->
+                        {% include 'blog/blog_search.html' %}
+
+                        <!-- Categories -->
+                        {% categories_count %}
+
+                        <!-- Most Popular -->
+                        {% popular_posts_blogpage %}
+
+                        <!-- Archive -->
+                        {% archives_blog %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

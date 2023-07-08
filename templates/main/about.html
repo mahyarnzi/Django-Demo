@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load main_tags %}
+{% block content %}
+
+    <!-- Title Page -->
+    <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15"
+             style="background-image: url({{ background|image_url:'about_top' }});">
+        <h2 class="tit6 t-center">
+            About Us
+        </h2>
+    </section>
+
+    <!-- Our Story -->
+    <section id='summary' class="bg2-pattern p-t-116 p-b-110 t-center p-l-15 p-r-15">
+		<span class="tit2 t-center">
+			{{ summary.title|split:1 }}
+		</span>
+
+        <h3 class="tit3 t-center m-b-35 m-t-5">
+            {{ summary.title|split:2 }}
+        </h3>
+        <div class="col-8 t-center size32 m-l-r-auto">
+            {{ summary.content|safe }}
+        </div>
+    </section>
+
+    <!-- Banner 1 -->
+    <div class="parallax0 parallax100" style="background-image: url({{ background|image_url:'about_middle' }});">
+        <div class="overlay0-parallax t-center size33"></div>
+    </div>
+
+    <!-- Features -->
+    <section id="feature" class="bg1-pattern p-t-120 p-b-105">
+        <div class="container">
+            {% for feature in features %}
+                {% if forloop.counter|divisibleby:2 %}
+                    <div id="feature/{{ feature.id }}" class="row p-t-50">
+                        <div class="col-md-6 p-t-45 p-b-30">
+                            <div class="wrap-text-delicious t-center">
+						<span class="tit2 t-center">
+							{{ feature.title|split:1 }}
+						</span>
+                                <h3 class="tit3 t-center m-b-35 m-t-5">
+                                    {{ feature.title|split:2 }}
+                                </h3>
+                                <p class="t-center m-b-22 size3 m-l-r-auto">
+                                    {{ feature.content|safe }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-b-30">
+                            <div class="wrap-pic-delicious size2 bo-rad-10 hov-img-zoom m-l-r-auto">
+                                <img src="{{ feature.image.url }}" alt="IMG-OUR">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id="feature/{{ feature.id }}" class="row p-t-50">
+                        <div class="col-md-6 p-b-30">
+                            <div class="wrap-pic-romantic size2 bo-rad-10 hov-img-zoom m-l-r-auto">
+                                <img src="{{ feature.image.url }}" alt="IMG-OUR">
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-t-45 p-b-30">
+                            <div class="wrap-text-romantic t-center">
+						<span class="tit2 t-center">
+							{{ feature.title|split:1 }}
+						</span>
+                                <h3 class="tit3 t-center m-b-35 m-t-5">
+                                    {{ feature.title|split:2 }}
+                                </h3>
+                                <p class="t-center m-b-22 size3 m-l-r-auto">
+                                    {{ feature.content|safe }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Banner 2-->
+    <div class="parallax0 parallax100" style="background-image: url({{ background|image_url:'about_bottom' }});">
+        <div class="overlay0-parallax t-center size33"></div>
+    </div>
+
+    <!-- Chef -->
+    <section class="section-review bgwhite p-t-115 p-b-95">
+        <div class=" container t-center">
+			<span class="tit2 t-center">
+				Meet Our
+			</span>
+            <h3 class="tit5 t-center m-b-50 m-t-5">
+                Chef
+            </h3>
+            <div class="row ">
+                <div class="wrap-slick3 slick3 col-lg-10 mx-auto">
+                    {% for chef in chefs %}
+                        <!-- -Block5 -->
+                        <div class="blo5 pos-relative p-t-60 t-center item-slick3 wrap-content-slide3 p-b-50 p-t-50 mx-1">
+                            <div class="pic-blo5 size14 bo4 wrap-cir-pic hov-img-zoom ab-c-t">
+                                <a><img src="{{ chef.image.url }}" alt="IGM-AVATAR"></a>
+                            </div>
+                            <div class="text-blo5 size34 t-center bo-rad-10 bo7 p-t-90 p-l-35 p-r-35 p-b-30">
+                                <span class="txt34 dis-block p-b-6">
+                                    {{ chef.name }}
+                                </span>
+
+                                <span class="dis-block t-center txt35 p-b-25">
+								{{ chef.title }}
+							</span>
+                                <p class="t-center">
+                                    {{ chef.content|safe }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="wrap-slick3-dots m-t-30"></div>
+    </section>
+{% endblock %}

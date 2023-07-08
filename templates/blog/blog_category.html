@@ -1,0 +1,16 @@
+<div class="categories">
+    <h4 class="txt33 bo5-b p-b-35 p-t-58">
+        Categories
+    </h4>
+
+    <ul>
+        {% for name, count in categories.items %}
+            <li class="bo5-b p-t-8 p-b-8">
+                <a href="{% url 'blog:category' cat_name=name %}" class="txt27 d-flex justify-content-between">
+                    <p>{{ name }}</p>
+                    <p>{{ count }}</p>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

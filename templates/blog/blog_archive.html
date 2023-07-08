@@ -1,0 +1,20 @@
+{% load main_tags %}
+<div class="archive">
+    <h4 class="txt33 p-b-20 p-t-43">
+        Archive
+    </h4>
+
+    <ul>
+        {% for date, count in archives.items %}
+            <li class="flex-sb-m p-t-8 p-b-8">
+                <a href="{% url 'blog:archive' month=date|split:1 year=date|split:2 %}" class="txt27">
+                    {{ date }}
+                </a>
+                <span class="txt29">
+					({{ count }})
+                </span>
+            </li>
+        {% endfor %}
+
+    </ul>
+</div>

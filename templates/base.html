@@ -1,0 +1,319 @@
+{% load static %}
+{% load menu_tags %}
+{% load main_tags %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mahyar Restaurant is not just a place, it is your dreams</title>
+    <meta name="keywords"
+          content="Food, Restaurant, breakfast, lunch, dinner, dessert, starter, drink, Mahyar, blog, fast food, sea food, kebab, pizza, Iran, Tehran">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="This international restaurant has a number of food in its menu, from sea food to fast food. Breakfast, lunch, dinner, dessert, starter, drink are served.">
+
+    <!--===============================================================================================-->
+    {% logo as logo %}
+    <link rel="icon" type="image/png" href="{{ logo.icon.url }}">
+
+    {% compress css %}
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/bootstrap/css/bootstrap.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'main/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/fonts/themify/themify-icons.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/animate/animate.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/css-hamburgers/hamburgers.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/animsition/css/animsition.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/select2/select2.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/daterangepicker/daterangepicker.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/slick/slick.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/lightbox2/css/lightbox.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/util.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/linearicons.css' %}">
+        <!--===============================================================================================-->
+    {% endcompress %}
+</head>
+<body class="animsition">
+{% include 'message.html' %}
+
+<!-- Header -->
+<header>
+    <!-- Header desktop -->
+    <div class="wrap-menu-header gradient1 trans-0-4">
+        <div class="container h-full">
+            <div class="wrap_header trans-0-3">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="{% url 'website:index' %}">
+                        <img src="{{ logo.logo_no_background.url }}" alt="IMG-LOGO"
+                             data-logofixed="{{ logo.logo_background.url }}">
+                    </a>
+                </div>
+
+                <!-- Menu -->
+                <div class="wrap_menu p-l-45 p-l-0-xl">
+                    <nav class="menu">
+                        <ul class="main_menu">
+                            <li>
+                                <a href="{% url 'website:index' %}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'website:about' %}">About</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'menu:menu' %}">Menu</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'reservation:reservation' %}">Reservation</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'blog:index' %}">Blog</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'website:contact' %}">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!-- Authentication -->
+                <div class="flex-w flex-l-m p-r-20">
+                    <ul class="main_menu authentication">
+                        {% if request.user.is_authenticated %}
+                            <li style="color:#ec1d25;">{{ request.user.get_full_name }}</li>
+                            <li><a href="{% url 'accounts:logout' %}">Sign out</a></li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login' %}">Sign in</a></li>
+                            <li><a href="{% url 'accounts:signup' %}">Sign up</a></li>
+                        {% endif %}
+                    </ul>
+                    <button class="btn-show-sidebar m-l-33 trans-0-4"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Sidebar -->
+<aside class="sidebar trans-0-4">
+    <!-- Button Hide sidebar -->
+    <button class="btn-hide-sidebar ti-close color0-hov trans-0-4"></button>
+
+    <!-- - -->
+    <ul class="menu-sidebar p-t-95 p-b-70">
+        <li class="t-center m-b-13">
+            <a href="{% url 'website:index' %}" class="txt19">Home</a>
+        </li>
+
+        <li class="t-center m-b-13">
+            <a href="{% url 'website:about' %}" class="txt19">About</a>
+        </li>
+
+        <li class="t-center m-b-13">
+            <a href="{% url 'menu:menu' %}" class="txt19">Menu</a>
+        </li>
+
+        <li class="t-center m-b-13">
+            <a href="{% url 'blog:index' %}" class="txt19">Blog</a>
+        </li>
+
+        <li class="t-center m-b-33">
+            <a href="{% url 'website:contact' %}" class="txt19">Contact</a>
+        </li>
+
+        <li class="t-center">
+            <!-- Button3 -->
+            <a href="{% url 'reservation:reservation' %}" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
+                Reservation
+            </a>
+        </li>
+    </ul>
+</aside>
+
+{% block content %}
+{% endblock %}
+
+<!-- Footer -->
+<footer class="bg1">
+    <div class="container p-t-10 p-b-10">
+        <div class="row">
+            <div class="col-sm-12 col-md-2 p-t-20">
+                <!-- - -->
+                <h2 class="txt13 m-b-20">
+                    Menu
+                </h2>
+
+                <ul class="m-b-10">
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#starter">
+                            Starter
+                        </a>
+                    </li>
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#breakfast">
+                            Breakfast
+                        </a>
+                    </li>
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#lunch">
+                            Lunch
+                        </a>
+                    </li>
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#dinner">
+                            Dinner
+                        </a>
+                    </li>
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#dessert">
+                            Dessert
+                        </a>
+                    </li>
+                    <li class="txt14 m-b-2">
+                        <i class="dis-inline-block size19" aria-hidden="true"></i>
+                        <a href="{% url "menu:menu" %}#drink">
+                            Drink
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-12 col-md-2 p-t-20">
+                <div class="image p-t-30">
+                    <img src="{{ logo.logo_background.url }}" alt="IMG-LOGO"
+                         data-logofixed="{{ logo.logo_background.url }}">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 p-t-20">
+                <!-- - -->
+                <h3 class="txt13 m-b-20">
+                    News Letter
+                </h3>
+                <p class="m-l-30 -align-left m-r-40">
+                    Don't worry about missing wonderful discounts in our menu. We can inform you by sending the email.
+                </p>
+                <p class="m-l-30">Just follow us by filling the below box.</p>
+                <div class="m-l-30 m-t-10">
+                    <form
+                            action="{% url 'website:newsletter' %}"
+                            method="post" class="subscription relative">
+                        {% csrf_token %}
+                        <div class="input-group d-flex flex-row bo2 bo-rad-5" style="width: fit-content">
+                            <input class='px-2' name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
+                                   onblur="this.placeholder = 'Email Address '" required="" type="email">
+                            <button class="btn btn-custom" type="submit"><span class="lnr lnr-location"></span></button>
+                        </div>
+                        <div class="mt-10 info"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 p-t-20">
+                <!-- - -->
+                <h4 class="txt13 m-b-30">
+                    Gallery
+                </h4>
+
+                <!-- Gallery footer -->
+                <div class="wrap-gallery-footer flex-w m-l-30">
+                    {% gallery as gallery %}
+                    {% for photo in gallery %}
+                        <a class="item-gallery-footer wrap-pic-w" href="{{ photo.0 }}"
+                           data-lightbox="gallery-footer">
+                            <img src="{{ photo.1 }}" alt="GALLERY">
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="end-footer bg2">
+            <div class="container">
+                <div class="flex-sb-m flex-w p-t-22 p-b-22">
+                    <div class="p-t-5 p-b-5">
+                        <a href="https://www.instagram.com/mahyarnzi" class="fs-15 c-white"><i class="fa fa-instagram"
+                                                                                               aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/mahyarnzi" class="fs-15 c-white"><i
+                                class="fa fa-facebook m-l-18" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/mahyarnazari" class="fs-15 c-white"><i
+                                class="fa fa-linkedin m-l-18" aria-hidden="true"></i></a>
+                        <a href="https://github.com/mahyarnzi" class="fs-15 c-white"><i
+                                class="fa fa-github m-l-18" aria-hidden="true"></i></a>
+                    </div>
+                    <div class="txt17 p-r-20 p-t-5 p-b-5">
+                        Copyright &copy; 2018 All rights reserved | This template is made with <i
+                            class="fa fa-heart"></i>
+                        by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="fa fa-angle-double-up" aria-hidden="true"></i>
+		</span>
+</div>
+
+<!-- Container Selection1 -->
+<div id="dropDownSelect1"></div>
+
+{% compress js %}
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/bootstrap/js/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/slick/slick.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/slick-custom.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/parallax100/parallax100.js' %}"></script>
+    <script type="text/javascript">
+        $(".parallax100").parallax100();
+    </script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/countdowntime/countdowntime.js' %}"></script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{% static 'main/vendor/lightbox2/js/lightbox.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'main/js/main.js' %}"></script>
+
+
+    <script>
+        $(".alert").fadeOut(12000);
+        setTimeout(() => $("#alert").alert("close"), 12000);
+    </script>
+
+{% endcompress %}
+</body>
+</html>
