@@ -4,8 +4,6 @@
 {% load accounts_tags %}
 {% block content %}
 
-    {#    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">#}
-    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">#}
     {% compress css %}
         <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/style.css' %}">
     {% endcompress %}
@@ -18,11 +16,5 @@
         {% block content_login %}
 
         {% endblock %}
-        {#        {% compress js %}#}
-        {#            <script src="{% static 'accounts/js/jquery.min.js' %}"></script>#}
-        {#            <script src="{% static  'accounts/js/popper.js' %}"></script>#}
-        {#            <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>#}
-        {#            <script src="{% static 'accounts/js/main.js' %}"></script>#}
-        {#        {% endcompress %}#}
     </section>
 {% endblock %}
