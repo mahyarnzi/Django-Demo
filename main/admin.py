@@ -2,8 +2,6 @@ import json
 from django.contrib import admin
 from main.models import Contact, Newsletter, Addresses, About, Chef, Background, Logo
 from django_summernote.admin import SummernoteModelAdmin
-from django_google_maps import widgets as map_widgets
-from django_google_maps import fields as map_fields
 
 
 @admin.register(Contact)
@@ -21,15 +19,7 @@ class NewsletterAdmin(admin.ModelAdmin):
 
 @admin.register(Addresses)
 class AddressesAdmin(admin.ModelAdmin):
-    list_display = ('location',)
-    formfield_overrides = {map_fields.AddressField: {'widget':
-        map_widgets.GoogleMapsAddressWidget(
-            attrs={'data-map-type': 'roadmap',
-                   'data - autocomplete - options': json.dumps({'types': ['geocode', 'establishment'],
-                                                                'componentRestrictions': {'country': 'ir'}})
-                   })
-                                                    },
-                            }
+    list_display = ('title',)
 
 
 @admin.register(Chef)

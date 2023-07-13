@@ -2,7 +2,7 @@ from django.db import models
 from accounts.models import CustomUser
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill  # or try ResizeToFill
-from django_google_maps import fields as map_fields
+from osm_field.fields import LatitudeField, LongitudeField, OSMField
 
 
 class Background(models.Model):
@@ -51,18 +51,20 @@ class Newsletter(models.Model):
 
 
 class Addresses(models.Model):
+    title = models.CharField(max_length=50, null=True)
     location = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     work_start_time = models.TimeField()
     work_end_time = models.TimeField()
-    address = map_fields.AddressField(max_length=200, blank=True, null=True)
-    geolocation = map_fields.GeoLocationField(max_length=100, blank=True, null=True)
+    iframe_url = models.URLField(null=True, blank=True,max_length=500)
+    latitude = LatitudeField(null=True, blank=True)
+    longitude = LongitudeField(null=True, blank=True)
 
     class Meta:
-        ordering = ['-location']
+        ordering = ['-title']
 
     def __str__(self):
-        return self.location
+        return self.title
 
 
 class About(models.Model):

@@ -1,5 +1,4 @@
 from pathlib import Path
-# from Tools.scripts.serve import app
 import blog.apps
 import os
 from django.contrib.messages import constants as messages
@@ -36,7 +35,7 @@ INSTALLED_APPS = [
     'imagekit',
     'simplemathcaptcha',
     'phonenumber_field',
-    'django_google_maps'
+    'osm_field',
 ]
 
 MIDDLEWARE = [
@@ -173,5 +172,3 @@ COMPRESS_CSS_FILTERS = ["compressor.filters.cssmin.CSSMinFilter"]
 COMPRESS_JS_FILTERS = ["compressor.filters.jsmin.JSMinFilter"]
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-GOOGLE_MAPS_API_KEY = 'AIzaSyCBqk7N9hAekFLOvcuetxzbItOzMHJBOs0'
