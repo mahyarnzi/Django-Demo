@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Table, Reservation, ReservationContact, Background
+from .models import Table, Reservation, ReservationContact
 
 
 @admin.register(Table)
@@ -15,8 +15,3 @@ class ReservationAdmin(admin.ModelAdmin):
 @admin.register(ReservationContact)
 class ReservationContactAdmin(admin.ModelAdmin):
     list_display = ['type']
-
-
-@admin.register(Background)
-class BackgroundAdmin(admin.ModelAdmin):
-    list_display = ['title']

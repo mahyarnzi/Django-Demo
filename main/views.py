@@ -1,8 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.conf import settings
+from django.http import HttpResponseRedirect
 from restaurant.setting.prod import SET_ENDTIME
-from main.models import Addresses, Chef, About, Background, Logo
+from main.models import Addresses, Chef, About
 from main.forms import ContactForm, NewsletterForm
 from django.contrib import messages
 from datetime import datetime
@@ -10,9 +9,7 @@ from datetime import datetime
 
 # Create your views here.
 def index_view(request):
-    background = Background.objects.all()
-    context = {'background': background}
-    return render(request, 'main/index.html', context=context)
+    return render(request, 'main/index.html')
 
 
 def contact_view(request):
@@ -30,10 +27,9 @@ def contact_view(request):
                     for error in field.errors:
                         messages.add_message(request, messages.ERROR, error)
 
-    background = Background.objects.all()
     form = ContactForm()
     addresses = Addresses.objects.all()
-    return render(request, 'main/contact.html', {'form': form, 'addresses': addresses, 'background': background})
+    return render(request, 'main/contact.html', {'form': form, 'addresses': addresses})
 
 
 def about_view(request):
@@ -41,8 +37,7 @@ def about_view(request):
     about = About.objects.all()
     features = about.filter(type='Feature').order_by('-updated_date')
     summary = about.filter(type='Summary').order_by('-updated_date').first()
-    background = Background.objects.all()
-    context = {'background': background, 'chefs': chefs, 'features': features, 'summary': summary}
+    context = {'chefs': chefs, 'features': features, 'summary': summary}
     return render(request, 'main/about.html', context=context)
 
 
@@ -67,6 +62,4 @@ def maintenance_view(request):
     hours = int(divmod(duration_in_s, 3600)[0])
     if hours < 0:
         hours = 24
-    background = Background.objects.filter(title='maintenance').first()
-    logo = Logo.objects.first()
-    return render(request, 'maintenance/maintenance.html', {'hours': hours, 'background': background, 'logo': logo})
+    return render(request, 'maintenance/maintenance.html', {'hours': hours})

@@ -43,9 +43,3 @@ def archives_blog():
 def function(post):
     comments_count = Comment.objects.filter(post=post).count()
     return comments_count
-
-
-@register.filter()
-def image_url(queryset, title):
-    result = queryset.filter(title=title).first()
-    return result.image.url

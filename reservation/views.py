@@ -1,13 +1,11 @@
-from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
-from .models import Reservation, Table, ReservationContact, Background
+from django.shortcuts import render
+from .models import Reservation, Table, ReservationContact
 from .forms import ReservationForm
 from django.contrib import messages
-from datetime import datetime
+from django.core.mail import send_mail
 
 
 def reservation_view(request):
-    background = Background.objects.all()
     reservation_info = ReservationContact.objects.all()
     if request.method == 'POST':
         form = ReservationForm(request.POST)
@@ -23,15 +21,18 @@ def reservation_view(request):
             if table:
                 changed_form.table = table
                 changed_form.save()
-                messages.add_message(request, messages.SUCCESS,
-                                     'Table "{}" is successfully reserved at "{}" on "{}" for you.'.format(table.name,
+                successful_message = 'Table "{}" is successfully reserved at "{}" on "{}" for you.'.format(table.name,
                                                                                                            time.strftime(
                                                                                                                '%H:%M'),
-                                                                                                           date))
+                                                                                                           date)
+                messages.add_message(request, messages.SUCCESS, successful_message)
+
+                send_mail(
+                    "Restaurant Reservation", successful_message, "info@mahyarnazari.ir", [request.user.email],
+                    fail_silently=False,)
             else:
                 messages.add_message(request, messages.ERROR,
                                      'There are no empty tables at this time. Please choose another time.')
-
 
         else:
             if form.errors:
@@ -39,5 +40,5 @@ def reservation_view(request):
                     for error in field.errors:
                         messages.add_message(request, messages.ERROR, error)
 
-    context = {'reservation_info': reservation_info, 'background': background}
+    context = {'reservation_info': reservation_info}
     return render(request, 'reservation/reservation.html', context=context)

@@ -1,6 +1,6 @@
 {% load static %}
 {% load menu_tags %}
-{% load main_tags %}
+{% load background_tags %}
 {% load compress %}
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +18,10 @@
     <meta property="og:image" content="{{ logo.logo_background.url }}">
     <meta property="og:url" content="https://mahyarnazari.ir">
     <meta name="twitter:title" content="Mahyar Restaurant is not just a place, it is your dreams">
-    <meta name="twitter:description" content="This international restaurant has a number of food in its menu, from sea food to fast food. Breakfast, lunch, dinner, dessert, starter, drink are served.">
+    <meta name="twitter:description"
+          content="This international restaurant has a number of food in its menu, from sea food to fast food. Breakfast, lunch, dinner, dessert, starter, drink are served.">
     <meta name="twitter:url" content="https://mahyarnazari.ir">
     <!--===============================================================================================-->
-    {% logo as logo %}
-    <link rel="icon" type="image/png" href="{{ logo.icon.url }}">
 
     {% compress css %}
         <!--===============================================================================================-->
@@ -52,6 +51,9 @@
         <link rel="stylesheet" type="text/css" href="{% static 'main/css/linearicons.css' %}">
         <!--===============================================================================================-->
     {% endcompress %}
+    {% logo as logo %}
+    {% background as background %}
+    <link rel="icon" type="image/png" href="{{ logo.icon.url }}">
 </head>
 <body class="animsition">
 {% include 'message.html' %}

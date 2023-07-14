@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load background_tags %}
 {% load main_tags %}
 {% load blog_tags %}
-{% load menu_tags %}
 {% load humanize %}
 {% block content %}
 
@@ -129,9 +128,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <!-- Breakfast -->
-                            {% menu as menu %}
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_breakfast' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_breakfast' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#breakfast" class="btn2 flex-c-m txt5 ab-c-m size5">
@@ -143,7 +141,7 @@
                         <div class="col-sm-6">
                             <!-- Lunch -->
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_lunch' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_lunch' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#lunch" class="btn2 flex-c-m txt5 ab-c-m size5">
@@ -154,7 +152,7 @@
                         <div class="col-12">
                             <!-- Dinner -->
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_dinner' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_dinner' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#dinner" class="btn2 flex-c-m txt5 ab-c-m size5">
@@ -169,7 +167,7 @@
                         <div class="col-12">
                             <!-- Drink -->
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_drink' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_drink' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#drink" class="btn2 flex-c-m txt5 ab-c-m size5">
@@ -180,7 +178,7 @@
                         <div class="col-12">
                             <!-- Starter -->
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_starter' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_starter' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#starter" class="btn2 flex-c-m txt5 ab-c-m size5">
@@ -191,7 +189,7 @@
                         <div class="col-12">
                             <!-- Desert -->
                             <div class="item-ourmenu bo-rad-10 hov-img-zoom pos-relative m-t-30">
-                                <img src="{{ menu|image_thumbnail_url:'menu_dessert' }}" alt="IMG-MENU">
+                                <img src="{{ background|image_thumbnail_url:'menu_dessert' }}" alt="IMG-MENU">
 
                                 <!-- Button2 -->
                                 <a href="{% url "menu:menu" %}#dessert" class="btn2 flex-c-m txt5 ab-c-m size5">

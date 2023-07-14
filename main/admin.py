@@ -1,6 +1,6 @@
 import json
 from django.contrib import admin
-from main.models import Contact, Newsletter, Addresses, About, Chef, Background, Logo
+from main.models import Contact, Newsletter, Addresses, About, Chef
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -34,13 +34,3 @@ class ChefAdmin(SummernoteModelAdmin):
 class AboutAdmin(SummernoteModelAdmin):
     list_display = ('title', 'type')
     summernote_fields = ('content',)
-
-
-@admin.register(Background)
-class BackgroundAdmin(admin.ModelAdmin):
-    list_display = ['title']
-
-
-@admin.register(Logo)
-class LogoAdmin(admin.ModelAdmin):
-    list_display = ['title']

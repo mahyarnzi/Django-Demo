@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load background_tags %}
 {% load compress %}
-{% load accounts_tags %}
 {% block content %}
 
     {% compress css %}
@@ -11,7 +11,7 @@
     {% background as background %}
 
     <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15 ftco-section"
-             style="background-image: url({{ background }});">
+             style="background-image: url({{ background|image_url:'account' }});">
 
         {% block content_login %}
 

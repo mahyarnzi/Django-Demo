@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Comment, Background
+from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import CommentForm
 from django.contrib import messages
@@ -25,8 +25,7 @@ def blog_view(request, **kwargs):
         posts = posts.get_page(1)
     except EmptyPage:
         posts = posts.get_page(1)
-    background = Background.objects.all()
-    context = {'posts': posts, 'background': background}
+    context = {'posts': posts}
     return render(request, 'blog/blog-home.html', context)
 
 
@@ -47,9 +46,7 @@ def blog_single(request, pid):
                                         status=1).order_by('published_date').last()
     post.increase_counted_views()
     form = CommentForm()
-    background = Background.objects.all()
-    context = {'post': post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form,
-               'background': background}
+    context = {'post': post, 'next_post': next_post, 'previous_post': previous_post, 'comments': comments, 'form': form}
     return render(request, 'blog/blog-single.html', context)
 
 

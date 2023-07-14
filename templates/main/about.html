@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
-{% load static %}
 {% load main_tags %}
+{% load background_tags %}
 {% block content %}
-
+    {% background as background %}
     <!-- Title Page -->
     <section class="bg-title-page flex-c-m p-b-80 p-l-15 p-r-15"
              style="min-height: 100%; background-image: url({{ background|image_url:'about_top' }});">

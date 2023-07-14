@@ -1,5 +1,5 @@
 from django import template
-from main.models import About, Logo
+from main.models import About
 
 register = template.Library()
 
@@ -16,14 +16,3 @@ def function():
 def split(value, arg):
     return str(value).split(' ')[int(arg) - 1]
 
-
-@register.filter()
-def image_url(queryset, title):
-    result = queryset.filter(title=title).first()
-    return result.image.url
-
-
-@register.simple_tag(name='logo')
-def function():
-    logo = Logo.objects.filter(title='logo').first()
-    return logo

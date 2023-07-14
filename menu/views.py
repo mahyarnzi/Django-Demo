@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Menu, Background
+from .models import Menu
 
 
 def menu_view(request):
@@ -10,9 +10,8 @@ def menu_view(request):
     dinner = menus.filter(meal__name='Dinner').order_by('name')
     dessert = menus.filter(meal__name='Dessert').order_by('name')
     drink = menus.filter(meal__name='Drink').order_by('name')
-    background = Background.objects.all()
 
-    context = {'background': background, 'starter': starter, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner,
+    context = {'starter': starter, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner,
                'dessert': dessert,
                'drink': drink}
     return render(request, 'menu/menu.html', context)

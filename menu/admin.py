@@ -1,5 +1,5 @@
 from django.contrib import admin
-from menu.models import Menu, Meal, Background
+from menu.models import Menu, Meal
 
 
 @admin.register(Menu)
@@ -10,8 +10,3 @@ class MenuAdmin(admin.ModelAdmin):
 @admin.register(Meal)
 class MealAdmin(admin.ModelAdmin):
     list_display = ['name']
-
-
-@admin.register(Background)
-class BackgroundAdmin(admin.ModelAdmin):
-    list_display = ['title']

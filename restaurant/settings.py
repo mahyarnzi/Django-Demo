@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'menu.apps.MenuConfig',
     'reservation.apps.ReservationConfig',
+    'background.apps.BackgroundConfig',
     'django.contrib.humanize',
     'django_summernote',
     'captcha',

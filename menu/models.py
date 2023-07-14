@@ -37,26 +37,3 @@ class Menu(models.Model):
     def get_absolute_url(self):
         return reverse('menu:menu')
 
-
-class Background(models.Model):
-    image = ProcessedImageField(upload_to='background/', format='JPEG', processors=[ResizeToFill(1366, 768)],
-                                options={'quality': 80}, default='default/no-image.jpg')
-
-    image_thumbnail = ImageSpecField(source='image',
-                                     processors=[ResizeToFill(400, 300)],
-                                     format='JPEG',
-                                     options={'quality': 80})
-
-    title_list = ['menu_starter', 'menu_breakfast', 'menu_lunch', 'menu_dinner', 'menu_dessert',
-                  'menu_drink']
-    TITLE_CHOICE = [(i, i) for i in title_list]
-    title = models.CharField(choices=TITLE_CHOICE, unique=True, null=True, blank=True, max_length=20)
-
-    created_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['title']
-
-    def __str__(self):
-        return self.title
