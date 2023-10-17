@@ -15,9 +15,9 @@ ALLOWED_HOSTS = ['mahyarnazari.ir', 'www.mahyarnazari.ir']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mahyarna_restaurant',
-        'USER': 'mahyarna_restaurant',
-        'PASSWORD': 'q#IZJHT=I2Za',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {

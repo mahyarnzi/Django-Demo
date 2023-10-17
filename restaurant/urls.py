@@ -7,6 +7,7 @@ from main.sitemaps import StaticViewSitemap
 from blog.sitemaps import BlogSitemap
 from menu.sitemaps import MenuSitemap
 from reservation.sitemaps import ReservationSitemap
+from restaurant.setting.dev import STATIC_ROOT, MEDIA_ROOT
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -28,5 +29,5 @@ urlpatterns = [
     path('menu/', include('menu.urls')),
     path('reservation/', include('reservation.urls')),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=MEDIA_ROOT)
